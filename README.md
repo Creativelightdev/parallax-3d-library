@@ -13,6 +13,7 @@ Biblioteca de efeitos parallax e 3D para projetos web, baseada em [simpleParalla
 - [jarallax](https://www.npmjs.com/package/jarallax) v3 — parallax em backgrounds de vídeo e imagem
 - [parallax-effect](https://www.npmjs.com/package/parallax-effect) v2 — parallax 3D via rastreamento facial com TensorFlow.js
 - [@grokku/parallax-scroller](https://github.com/grokku/parallax-scroller) — parallax scroller via GitHub
+- [ukiyojs](https://github.com/yitengjun/ukiyo-js) v4 — parallax de background dinâmico e moderno
 - [pureParallax](https://github.com/pballasiotes/pureParallax) — **referência** (sem pacote npm publicado)
 
 ## Instalação
@@ -44,6 +45,42 @@ function ParallaxImage() {
   return <img ref={imgRef} src="sua-imagem.jpg" alt="parallax" />
 }
 ```
+
+## ukiyojs (uso)
+
+Parallax de background eficiente com suporte a imagem, vídeo e elementos inline.
+
+```tsx
+import { useEffect, useRef } from 'react'
+import Ukiyo from 'ukiyojs'
+
+function App() {
+  const imgRef = useRef<HTMLImageElement>(null)
+
+  useEffect(() => {
+    if (!imgRef.current) return
+    const ukiyo = new Ukiyo(imgRef.current, {
+      scale: 1.5,   // zoom do parallax
+      speed: 1.5,   // velocidade (1 = normal)
+      willChange: true,
+    })
+    return () => ukiyo.destroy()
+  }, [])
+
+  return (
+    <img
+      ref={imgRef}
+      src="sua-imagem.jpg"
+      alt="parallax"
+      style={{ width: '100%', height: '600px', objectFit: 'cover' }}
+    />
+  )
+}
+```
+
+> Também funciona com `<video>` e qualquer elemento com `background-image`.
+
+---
 
 ## @grokku/parallax-scroller (uso)
 

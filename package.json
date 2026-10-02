@@ -10,13 +10,17 @@
   },
   "dependencies": {
     "@grokku/parallax-scroller": "github:grokku/parallax-scroller",
+    "atropos": "^2.0.2",
     "jarallax": "^3.1.0",
+    "lax.js": "^2.0.3",
+    "locomotive-scroll": "^5.0.1",
     "parallax-effect": "^2.1.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-scroll-parallax": "^3.5.0",
     "rellax": "^1.12.1",
     "simple-parallax-js": "^7.0.0",
+    "tilt.js": "^1.2.1",
     "ukiyojs": "github:yitengjun/ukiyo-js"
   },
   "devDependencies": {

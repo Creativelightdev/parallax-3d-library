@@ -15,6 +15,10 @@ Biblioteca de efeitos parallax e 3D para projetos web, baseada em [simpleParalla
 - [@grokku/parallax-scroller](https://github.com/grokku/parallax-scroller) — parallax scroller via GitHub
 - [ukiyojs](https://github.com/yitengjun/ukiyo-js) v4 — parallax de background dinâmico e moderno
 - [pureParallax](https://github.com/pballasiotes/pureParallax) — **referência** (sem pacote npm publicado)
+- [lax.js](https://www.npmjs.com/package/lax.js) v2 — animações suaves no scroll, < 4kb
+- [locomotive-scroll](https://www.npmjs.com/package/locomotive-scroll) v5 — scroll suave com parallax e detecção de visibilidade
+- [atropos](https://www.npmjs.com/package/atropos) v2 — efeito parallax 3D ao toque/hover
+- [tilt.js](https://www.npmjs.com/package/tilt.js) v1 — inclinação parallax ao passar o mouse
 
 ## Instalação
 
@@ -45,6 +49,115 @@ function ParallaxImage() {
   return <img ref={imgRef} src="sua-imagem.jpg" alt="parallax" />
 }
 ```
+
+## lax.js (uso)
+
+Animações baseadas em scroll com sintaxe declarativa simples.
+
+```tsx
+import { useEffect } from 'react'
+import lax from 'lax.js'
+
+function App() {
+  useEffect(() => {
+    lax.init()
+    lax.addDriver('scrollY', () => window.scrollY)
+    lax.addElements('.lax', {
+      scrollY: { translateY: [[0, 500], [0, -150]] }
+    })
+  }, [])
+
+  return <div className="lax"><h1>Título com parallax</h1></div>
+}
+```
+
+---
+
+## locomotive-scroll (uso)
+
+Scroll suave com parallax e detecção de elementos visíveis.
+
+```tsx
+import { useEffect, useRef } from 'react'
+import LocomotiveScroll from 'locomotive-scroll'
+import 'locomotive-scroll/dist/locomotive-scroll.css'
+
+function App() {
+  const containerRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const scroll = new LocomotiveScroll({
+      el: containerRef.current!,
+      smooth: true,
+    })
+    return () => scroll.destroy()
+  }, [])
+
+  return (
+    <div ref={containerRef} data-scroll-container>
+      <section data-scroll-section>
+        <h1 data-scroll data-scroll-speed="2">Título rápido</h1>
+        <p  data-scroll data-scroll-speed="-1">Parágrafo lento</p>
+      </section>
+    </div>
+  )
+}
+```
+
+---
+
+## atropos (uso)
+
+Efeito parallax 3D responsivo ao toque e mouse.
+
+```tsx
+import Atropos from 'atropos/react'
+import 'atropos/css'
+
+function Card3D() {
+  return (
+    <Atropos className="my-atropos" shadow={true} highlight={true}>
+      <img data-atropos-offset="-5" src="fundo.jpg" alt="bg" />
+      <h2 data-atropos-offset="5">Texto em destaque</h2>
+      <p  data-atropos-offset="2">Subtítulo</p>
+    </Atropos>
+  )
+}
+```
+
+> `data-atropos-offset`: negativo = recuado, positivo = saliente. Intervalo: `-10` a `10`.
+
+---
+
+## tilt.js (uso)
+
+Inclinação 3D ao passar o mouse, baseado em jQuery.
+
+```html
+<!-- Via CDN (vanilla) -->
+<div class="tilt-card" data-tilt data-tilt-max="25" data-tilt-speed="400" data-tilt-glare="true">
+  <p>Card com tilt</p>
+</div>
+<script src="https://unpkg.com/tilt.js/dest/tilt.jquery.js"></script>
+```
+
+```tsx
+// Via React (vanilla JS)
+import { useEffect, useRef } from 'react'
+import VanillaTilt from 'tilt.js'
+
+function TiltCard() {
+  const ref = useRef<HTMLDivElement>(null)
+  useEffect(() => {
+    if (!ref.current) return
+    VanillaTilt.init(ref.current, { max: 25, speed: 400, glare: true, 'max-glare': 0.5 })
+    return () => (ref.current as any)?.vanillaTilt?.destroy()
+  }, [])
+  return <div ref={ref} style={{ padding: '2rem', background: '#1a1a2e', borderRadius: 12 }}>Card Tilt</div>
+}
+```
+
+---
 
 ## ukiyojs (uso)
 

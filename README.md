@@ -11,6 +11,7 @@ Biblioteca de efeitos parallax e 3D para projetos web, baseada em [simpleParalla
 - [react-scroll-parallax](https://www.npmjs.com/package/react-scroll-parallax) v3
 - [rellax](https://www.npmjs.com/package/rellax) v1 — parallax leve via atributo `data-rellax-speed`
 - [jarallax](https://www.npmjs.com/package/jarallax) v3 — parallax em backgrounds de vídeo e imagem
+- [parallax-effect](https://www.npmjs.com/package/parallax-effect) v2 — parallax 3D via rastreamento facial com TensorFlow.js
 
 ## Instalação
 
@@ -41,6 +42,38 @@ function ParallaxImage() {
   return <img ref={imgRef} src="sua-imagem.jpg" alt="parallax" />
 }
 ```
+
+## parallax-effect (uso)
+
+Efeito parallax 3D baseado em **rastreamento facial** via webcam usando TensorFlow.js.
+A imagem reage à posição do rosto do usuário, criando ilusão de profundidade.
+
+```tsx
+import { useEffect, useRef } from 'react'
+import ParallaxEffect from 'parallax-effect'
+
+function FaceParallax() {
+  const canvasRef = useRef<HTMLCanvasElement>(null)
+
+  useEffect(() => {
+    if (!canvasRef.current) return
+    const effect = new ParallaxEffect(canvasRef.current, {
+      layers: [
+        { src: '/camada-fundo.png', depth: 0.1 },
+        { src: '/camada-meio.png',  depth: 0.3 },
+        { src: '/camada-frente.png', depth: 0.6 },
+      ],
+    })
+    return () => effect.destroy()
+  }, [])
+
+  return <canvas ref={canvasRef} width={800} height={600} />
+}
+```
+
+> Requer permissão de câmera. Quanto maior o `depth`, mais a camada se move.
+
+---
 
 ## jarallax (uso)
 

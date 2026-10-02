@@ -4,6 +4,15 @@ Coleção de sites e temas para inspiração de efeitos parallax, animações e 
 
 ---
 
+## Bibliotecas sem pacote npm
+
+### pureParallax
+- **Link:** https://github.com/pballasiotes/pureParallax
+- **Instalação:** `git clone https://github.com/pballasiotes/pureParallax`
+- **Observações:** Não publicado no npm; usar via clone ou cópia direta dos arquivos fonte
+
+---
+
 ## Temas / Templates
 
 ### Happy Smiles — Pediatric Dental Clinic (WordPress Theme)

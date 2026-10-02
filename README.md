@@ -12,6 +12,8 @@ Biblioteca de efeitos parallax e 3D para projetos web, baseada em [simpleParalla
 - [rellax](https://www.npmjs.com/package/rellax) v1 — parallax leve via atributo `data-rellax-speed`
 - [jarallax](https://www.npmjs.com/package/jarallax) v3 — parallax em backgrounds de vídeo e imagem
 - [parallax-effect](https://www.npmjs.com/package/parallax-effect) v2 — parallax 3D via rastreamento facial com TensorFlow.js
+- [@grokku/parallax-scroller](https://github.com/grokku/parallax-scroller) — parallax scroller via GitHub
+- [pureParallax](https://github.com/pballasiotes/pureParallax) — **referência** (sem pacote npm publicado)
 
 ## Instalação
 
@@ -42,6 +44,37 @@ function ParallaxImage() {
   return <img ref={imgRef} src="sua-imagem.jpg" alt="parallax" />
 }
 ```
+
+## @grokku/parallax-scroller (uso)
+
+```tsx
+import { useEffect, useRef } from 'react'
+import ParallaxScroller from '@grokku/parallax-scroller'
+
+function App() {
+  const containerRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    if (!containerRef.current) return
+    const scroller = new ParallaxScroller(containerRef.current)
+    return () => scroller.destroy()
+  }, [])
+
+  return <div ref={containerRef}>...</div>
+}
+```
+
+---
+
+## pureParallax
+
+> Não publicado no npm. Para usar, clone diretamente:
+> ```bash
+> git clone https://github.com/pballasiotes/pureParallax
+> ```
+> Referência salva em `references/sites.md`.
+
+---
 
 ## parallax-effect (uso)
 

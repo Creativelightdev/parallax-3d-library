@@ -9,6 +9,7 @@ Biblioteca de efeitos parallax e 3D para projetos web, baseada em [simpleParalla
 - Tailwind CSS
 - [simple-parallax-js](https://www.npmjs.com/package/simple-parallax-js) v7
 - [react-scroll-parallax](https://www.npmjs.com/package/react-scroll-parallax) v3
+- [rellax](https://www.npmjs.com/package/rellax) v1 — parallax leve via atributo `data-rellax-speed`
 
 ## Instalação
 
@@ -39,6 +40,31 @@ function ParallaxImage() {
   return <img ref={imgRef} src="sua-imagem.jpg" alt="parallax" />
 }
 ```
+
+## rellax (uso)
+
+```tsx
+import { useEffect } from 'react'
+import Rellax from 'rellax'
+
+function App() {
+  useEffect(() => {
+    const rellax = new Rellax('.rellax')
+    return () => rellax.destroy()
+  }, [])
+
+  return (
+    <div>
+      <img className="rellax" data-rellax-speed="-5" src="imagem.jpg" alt="parallax" />
+      <h1 className="rellax" data-rellax-speed="2">Título parallax</h1>
+    </div>
+  )
+}
+```
+
+> `data-rellax-speed`: negativo = move para cima, positivo = move para baixo. Intervalo recomendado: `-10` a `10`.
+
+---
 
 ## react-scroll-parallax (uso)
 

@@ -8,6 +8,7 @@ Biblioteca de efeitos parallax e 3D para projetos web, baseada em [simpleParalla
 - Vite
 - Tailwind CSS
 - [simple-parallax-js](https://www.npmjs.com/package/simple-parallax-js) v7
+- [react-scroll-parallax](https://www.npmjs.com/package/react-scroll-parallax) v3
 
 ## Instalação
 
@@ -39,7 +40,23 @@ function ParallaxImage() {
 }
 ```
 
-## Opções disponíveis
+## react-scroll-parallax (uso)
+
+```tsx
+import { ParallaxProvider, Parallax } from 'react-scroll-parallax'
+
+function App() {
+  return (
+    <ParallaxProvider>
+      <Parallax speed={-10}>
+        <img src="imagem.jpg" alt="parallax" />
+      </Parallax>
+    </ParallaxProvider>
+  )
+}
+```
+
+## Opções disponíveis (simple-parallax-js)
 
 | Opção | Tipo | Padrão | Descrição |
 |-------|------|--------|-----------|

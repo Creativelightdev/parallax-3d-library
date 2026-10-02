@@ -10,6 +10,7 @@ Biblioteca de efeitos parallax e 3D para projetos web, baseada em [simpleParalla
 - [simple-parallax-js](https://www.npmjs.com/package/simple-parallax-js) v7
 - [react-scroll-parallax](https://www.npmjs.com/package/react-scroll-parallax) v3
 - [rellax](https://www.npmjs.com/package/rellax) v1 — parallax leve via atributo `data-rellax-speed`
+- [jarallax](https://www.npmjs.com/package/jarallax) v3 — parallax em backgrounds de vídeo e imagem
 
 ## Instalação
 
@@ -40,6 +41,43 @@ function ParallaxImage() {
   return <img ref={imgRef} src="sua-imagem.jpg" alt="parallax" />
 }
 ```
+
+## jarallax (uso)
+
+```tsx
+import { useEffect, useRef } from 'react'
+import { jarallax } from 'jarallax'
+import 'jarallax/dist/jarallax.min.css'
+
+function ParallaxSection() {
+  const sectionRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    if (!sectionRef.current) return
+    jarallax(sectionRef.current, {
+      speed: 0.5, // 0 = fixo, 1 = scroll normal, < 1 = efeito parallax
+    })
+    return () => jarallax(sectionRef.current!, 'destroy')
+  }, [])
+
+  return (
+    <div
+      ref={sectionRef}
+      className="jarallax"
+      style={{
+        minHeight: '500px',
+        backgroundImage: 'url(sua-imagem.jpg)',
+      }}
+    >
+      <h2>Conteúdo sobre o parallax</h2>
+    </div>
+  )
+}
+```
+
+> Suporta também **vídeo como background**: `data-jarallax-video="https://youtu.be/..."`.
+
+---
 
 ## rellax (uso)
 
